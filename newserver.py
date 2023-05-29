@@ -43,7 +43,7 @@ def parse_acl():
             raise NotImplemented
 
 def parse_filtermap():
-    with open("config.json",encoding='u8') as f:
+    with open("filter-map.json",encoding='u8') as f:
         cfg=json.load(f)
     for i in cfg:
         config[i]=cfg[i]
@@ -51,11 +51,8 @@ def parse_filtermap():
 parse_config()
 parse_acl()
 parse_filtermap()
-print(config)
-exit()
+
 broker = Broker(config)
-
-
 
 async def test_coro():
     await broker.start()
