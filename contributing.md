@@ -1,8 +1,8 @@
-# Contributing to aMQTT
+# Contributing to urmqtt
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to aMQTT on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to urmqtt on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Development Setup
 
@@ -24,9 +24,9 @@ poetry install --no-dev
 
 Usage:
 ```
-poetry run amqtt
-poetry run amqtt_pub
-poetry run amqtt_sub
+poetry run urmqtt
+poetry run urmqtt_pub
+poetry run urmqtt_sub
 ```
 
 Or you can enter the virtual enviroment via:
@@ -53,7 +53,7 @@ If you have multiple python installations you can choose which one to use with p
 ## Testing
 
 When adding a new feature please add a test along with the feature. The testing coverage should not decrease.
-If you encounter a bug when using aMQTT which you then resolve, please reproduce the issue in a test as well.
+If you encounter a bug when using urmqtt which you then resolve, please reproduce the issue in a test as well.
 
 ## Style and linting
 

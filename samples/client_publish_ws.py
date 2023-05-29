@@ -1,8 +1,8 @@
 import logging
 import asyncio
 
-from amqtt.client import MQTTClient
-from amqtt.mqtt.constants import QOS_1, QOS_2
+from urmqtt.client import MQTTClient
+from urmqtt.mqtt.constants import QOS_1, QOS_2
 
 
 #

@@ -1,14 +1,14 @@
 References
 ==========
 
-Reference documentation for aMQTT console scripts and programming API.
+Reference documentation for urmqtt console scripts and programming API.
 
 Console scripts
 ---------------
 
-* :doc:`amqtt_pub` : MQTT client for publishing messages to a broker
-* :doc:`amqtt_sub` : MQTT client for subscribing to a topics and retrieved published messages
-* :doc:`amqtt` : Autonomous MQTT broker
+* :doc:`urmqtt_pub` : MQTT client for publishing messages to a broker
+* :doc:`urmqtt_sub` : MQTT client for subscribing to a topics and retrieved published messages
+* :doc:`urmqtt` : Autonomous MQTT broker
 
 Programming API
 ---------------
@@ -22,9 +22,9 @@ TBD
 .. toctree::
    :hidden:
 
-   amqtt_pub
-   amqtt_sub
-   amqtt
+   urmqtt_pub
+   urmqtt_sub
+   urmqtt
    mqttclient
    broker
    common

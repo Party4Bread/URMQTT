@@ -4,10 +4,10 @@ from os.path import join, dirname, isfile
 
 import pytest
 
-import amqtt.plugins
+import urmqtt.plugins
 from glob import glob
 
-from amqtt.plugins.manager import BaseContext
+from urmqtt.plugins.manager import BaseContext
 
 _INVALID_METHOD = "invalid_foo"
 _PLUGIN = "Plugin"
@@ -49,7 +49,7 @@ def removesuffix(self: str, suffix: str) -> str:
 
 
 def test_plugins_correct_has_attr():
-    module = amqtt.plugins
+    module = urmqtt.plugins
     for file in glob(join(dirname(module.__file__), "**/*.py"), recursive=True):
         if not isfile(file):
             continue

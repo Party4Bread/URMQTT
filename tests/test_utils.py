@@ -2,8 +2,8 @@ import yaml
 from hypothesis import given, strategies as st
 from hypothesis import provisional
 
-from amqtt.session import Session
-from amqtt import utils
+from urmqtt.session import Session
+from urmqtt import utils
 
 
 @given(st.text())
@@ -29,7 +29,7 @@ def test_format_client_message_unknown():
 def test_client_id():
     client_id = utils.gen_client_id()
     assert isinstance(client_id, str)
-    assert client_id.startswith("amqtt/")
+    assert client_id.startswith("urmqtt/")
 
 
 def test_read_yaml_config(tmpdir):

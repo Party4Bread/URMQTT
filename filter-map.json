@@ -1,0 +1,20 @@
+{
+    "data-filter":{
+        "enabled": true,
+        "plugins": ["lua_filter","py_filter"],
+        "mapper":[{
+            "topic":["/data/temp"],
+            "type":"lua",
+            "src":"(function(x) return tonumber(x)~=nil end)"
+        }]
+    },
+    "data-map": {
+        "enabled": true,
+        "plugins": ["lua_map","py_map"],
+        "mapper":[{
+            "topic":["/data/temp"],
+            "type":"lua",
+            "src":"(function(x) return tostring((tonumber(x)*32)*5/9) end)"
+        }]
+    }
+}

@@ -10,8 +10,8 @@ from unittest.mock import call, MagicMock, patch
 import psutil
 import pytest
 
-from amqtt.adapters import StreamReaderAdapter, StreamWriterAdapter
-from amqtt.broker import (
+from urmqtt.adapters import StreamReaderAdapter, StreamWriterAdapter
+from urmqtt.broker import (
     EVENT_BROKER_PRE_START,
     EVENT_BROKER_POST_START,
     EVENT_BROKER_PRE_SHUTDOWN,
@@ -22,8 +22,8 @@ from amqtt.broker import (
     EVENT_BROKER_CLIENT_UNSUBSCRIBED,
     EVENT_BROKER_MESSAGE_RECEIVED,
 )
-from amqtt.client import MQTTClient, ConnectException
-from amqtt.mqtt import (
+from urmqtt.client import MQTTClient, ConnectException
+from urmqtt.mqtt import (
     ConnectPacket,
     ConnackPacket,
     PublishPacket,
@@ -32,9 +32,9 @@ from amqtt.mqtt import (
     PubcompPacket,
     DisconnectPacket,
 )
-from amqtt.mqtt.connect import ConnectVariableHeader, ConnectPayload
-from amqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
-from amqtt.mqtt.protocol.broker_handler import BrokerProtocolHandler
+from urmqtt.mqtt.connect import ConnectVariableHeader, ConnectPayload
+from urmqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
+from urmqtt.mqtt.protocol.broker_handler import BrokerProtocolHandler
 
 
 formatter = (
@@ -594,7 +594,7 @@ async def test_client_subscribe_publish_dollar_topic_2(broker):
 
 @pytest.mark.asyncio
 @pytest.mark.xfail(
-    reason="see https://github.com/Yakifo/aio-amqtt/issues/16", strict=False
+    reason="see https://github.com/Yakifo/aio-urmqtt/issues/16", strict=False
 )
 async def test_client_publish_retain_subscribe(broker):
     sub_client = MQTTClient()

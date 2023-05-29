@@ -4,9 +4,9 @@
 import unittest
 import asyncio
 
-from amqtt.mqtt.packet import CONNECT, MQTTFixedHeader
-from amqtt.errors import MQTTException
-from amqtt.adapters import BufferReader
+from urmqtt.mqtt.packet import CONNECT, MQTTFixedHeader
+from urmqtt.errors import MQTTException
+from urmqtt.adapters import BufferReader
 
 
 class TestMQTTFixedHeaderTest(unittest.TestCase):

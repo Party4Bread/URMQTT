@@ -3,16 +3,16 @@ Changelog
 
 0.11.0-beta1 - 2023-02-09
 -------------------------
- * removed hbmqtt compatibility, importing amqtt is now mandatory
+ * removed hbmqtt compatibility, importing urmqtt is now mandatory
  * removed loop parameter from all functions
  * Python 3.7 to 3.10 compatibility
- * Fixed a major bug in plugin api, see https://github.com/Yakifo/amqtt/pull/92
- * Fixed a major bug due to CancelledError semantics changed in Python 3.8, see https://github.com/Yakifo/amqtt/pull/134
+ * Fixed a major bug in plugin api, see https://github.com/Yakifo/urmqtt/pull/92
+ * Fixed a major bug due to CancelledError semantics changed in Python 3.8, see https://github.com/Yakifo/urmqtt/pull/134
 
 0.10.0 - 2021-08-04
 -------------------
 
- * first release under new package name: amqtt
+ * first release under new package name: urmqtt
  * reworked unit tests
  * dropped support for python3.5 and earlier
  * added support for python3.8 and 3.9
@@ -20,7 +20,7 @@ Changelog
  * Fixes taboo topic checking without session username, from https://github.com/beerfactory/hbmqtt/pull/151
  * Move scripts module into hbmqtt module, from https://github.com/beerfactory/hbmqtt/pull/167
  * Download mosquitto certificate on the fly
- * importing `hbmqtt` is deprecated, use `amqtt`
+ * importing `hbmqtt` is deprecated, use `urmqtt`
  * Security fix: If an attacker could produce a KeyError inside an authentication plugin, the authentication was accepted instead of rejected
 
 0.9.5

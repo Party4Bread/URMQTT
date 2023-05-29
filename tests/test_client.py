@@ -10,9 +10,9 @@ import shutil
 
 import pytest
 
-from amqtt.client import MQTTClient, ConnectException
-from amqtt.broker import Broker
-from amqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
+from urmqtt.client import MQTTClient, ConnectException
+from urmqtt.broker import Broker
+from urmqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
 
 formatter = (
     "[%(asctime)s] %(name)s {%(filename)s:%(lineno)d} %(levelname)s - %(message)s"
@@ -39,7 +39,7 @@ temp_dir: str = ""
 def setup_module():
     global ca_file, temp_dir
 
-    temp_dir = tempfile.mkdtemp(prefix="amqtt-test-")
+    temp_dir = tempfile.mkdtemp(prefix="urmqtt-test-")
     url = "http://test.mosquitto.org/ssl/mosquitto.org.crt"
     ca_file = os.path.join(temp_dir, "mosquitto.org.crt")
     urllib.request.urlretrieve(url, ca_file)
@@ -76,7 +76,7 @@ async def test_connect_tcp_failure():
 
 @pytest.mark.asyncio
 async def test_connect_ws():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("ws://127.0.0.1:8080/")
@@ -87,7 +87,7 @@ async def test_connect_ws():
 
 @pytest.mark.asyncio
 async def test_reconnect_ws_retain_username_password():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("ws://fred:password@127.0.0.1:8080/")
@@ -102,7 +102,7 @@ async def test_reconnect_ws_retain_username_password():
 
 @pytest.mark.asyncio
 async def test_connect_ws_secure():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("ws://127.0.0.1:8081/", cafile=ca_file)
@@ -113,7 +113,7 @@ async def test_connect_ws_secure():
 
 @pytest.mark.asyncio
 async def test_connect_username_without_password():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://alice@127.0.0.1/")
@@ -124,7 +124,7 @@ async def test_connect_username_without_password():
 
 @pytest.mark.asyncio
 async def test_ping():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://127.0.0.1/")
@@ -136,7 +136,7 @@ async def test_ping():
 
 @pytest.mark.asyncio
 async def test_subscribe():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://127.0.0.1/")
@@ -157,7 +157,7 @@ async def test_subscribe():
 
 @pytest.mark.asyncio
 async def test_unsubscribe():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://127.0.0.1/")
@@ -176,7 +176,7 @@ async def test_unsubscribe():
 @pytest.mark.asyncio
 async def test_deliver():
     data = b"data"
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://127.0.0.1/")
@@ -202,7 +202,7 @@ async def test_deliver():
 
 @pytest.mark.asyncio
 async def test_deliver_timeout():
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client = MQTTClient()
     await client.connect("mqtt://127.0.0.1/")
@@ -226,7 +226,7 @@ async def test_cancel_publish_qos1():
     Tests that timeouts on published messages will clean up in flight messages
     """
     data = b"data"
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client_pub = MQTTClient()
     await client_pub.connect("mqtt://127.0.0.1/")
@@ -251,7 +251,7 @@ async def test_cancel_publish_qos2_pubrec():
     Tests that timeouts on published messages will clean up in flight messages
     """
     data = b"data"
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client_pub = MQTTClient()
     await client_pub.connect("mqtt://127.0.0.1/")
@@ -279,7 +279,7 @@ async def test_cancel_publish_qos2_pubcomp():
     Tests that timeouts on published messages will clean up in flight messages
     """
     data = b"data"
-    broker = Broker(broker_config, plugin_namespace="amqtt.test.plugins")
+    broker = Broker(broker_config, plugin_namespace="urmqtt.test.plugins")
     await broker.start()
     client_pub = MQTTClient()
     await client_pub.connect("mqtt://127.0.0.1/")

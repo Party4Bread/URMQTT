@@ -5,20 +5,20 @@ import unittest
 import asyncio
 import logging
 import random
-from amqtt.plugins.manager import PluginManager
-from amqtt.session import (
+from urmqtt.plugins.manager import PluginManager
+from urmqtt.session import (
     Session,
     OutgoingApplicationMessage,
     IncomingApplicationMessage,
 )
-from amqtt.mqtt.protocol.handler import ProtocolHandler
-from amqtt.adapters import StreamWriterAdapter, StreamReaderAdapter
-from amqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
-from amqtt.mqtt.publish import PublishPacket
-from amqtt.mqtt.puback import PubackPacket
-from amqtt.mqtt.pubrec import PubrecPacket
-from amqtt.mqtt.pubrel import PubrelPacket
-from amqtt.mqtt.pubcomp import PubcompPacket
+from urmqtt.mqtt.protocol.handler import ProtocolHandler
+from urmqtt.adapters import StreamWriterAdapter, StreamReaderAdapter
+from urmqtt.mqtt.constants import QOS_0, QOS_1, QOS_2
+from urmqtt.mqtt.publish import PublishPacket
+from urmqtt.mqtt.puback import PubackPacket
+from urmqtt.mqtt.pubrec import PubrecPacket
+from urmqtt.mqtt.pubrel import PubrelPacket
+from urmqtt.mqtt.pubcomp import PubcompPacket
 
 formatter = (
     "[%(asctime)s] %(name)s {%(filename)s:%(lineno)d} %(levelname)s - %(message)s"
@@ -39,7 +39,7 @@ class ProtocolHandlerTest(unittest.TestCase):
     def setUp(self):
         self.loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self.loop)
-        self.plugin_manager = PluginManager("amqtt.test.plugins", context=None)
+        self.plugin_manager = PluginManager("urmqtt.test.plugins", context=None)
 
     def tearDown(self):
         self.loop.close()

@@ -1,7 +1,7 @@
 import logging
 import asyncio
 import os
-from amqtt.broker import Broker
+from urmqtt.broker import Broker
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +9,7 @@ config = {
     "listeners": {
         "default": {
             "type": "tcp",
-            "bind": "0.0.0.0:1883",
+            "bind": "0.0.0.0:1884",
         },
         "ws-mqtt": {
             "bind": "127.0.0.1:8080",

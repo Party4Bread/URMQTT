@@ -4,8 +4,8 @@
 import asyncio
 import unittest
 
-from amqtt.mqtt.puback import PubackPacket, PacketIdVariableHeader
-from amqtt.adapters import BufferReader
+from urmqtt.mqtt.puback import PubackPacket, PacketIdVariableHeader
+from urmqtt.adapters import BufferReader
 
 
 class PubackPacketTest(unittest.TestCase):

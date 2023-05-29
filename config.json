@@ -1,0 +1,19 @@
+{
+    "listeners": {
+        "default": {
+            "type": "tcp",
+            "bind": "0.0.0.0:1883"
+        },
+        "ws-mqtt": {
+            "bind": "127.0.0.1:8081",
+            "type": "ws",
+            "max_connections": 10
+        }
+    },
+    "sys_interval": 10,
+    "auth": {
+        "allow-anonymous": true,
+        "password-file": "./passwd",
+        "plugins": ["auth_file", "auth_anonymous"]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "group":{
+        "super":["user:test","user:admin"]
+    },
+    "acls":[
+        {"type":"pub/sub","action":"allow",
+        "src":["group:super"],
+        "dst":["temperature/get","door/unlock"]},
+        {"type":"pub/sub","action":"allow",
+        "src":["user:temperature"],
+        "dst":["temperature/get"]},
+        {"type":"pub/sub","action":"allow",
+        "src":["user:door"],
+        "dst":["door/unlock"]}
+    ]
+}
