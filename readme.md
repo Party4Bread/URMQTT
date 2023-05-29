@@ -28,3 +28,11 @@ urmqtt implements the full set of `MQTT 3.1.1`_ protocol specifications and prov
 
 .. _MQTT: http://www.mqtt.org
 .. _MQTT 3.1.1: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html
+
+
+## To use
+Edit `config.json`,`acl.json`,`filter-map.json` to your flavor.  
+Run 
+```bash
+python newserver.py
+```
