@@ -229,6 +229,11 @@ class Broker:
         self.transitions.add_transition(
             trigger="start", source="stopped", dest="starting"
         )
+    
+    def rebuild_script(self):
+        import lupa 
+        # TODO : Reimplment to lupa from lua
+        #lupa.eval(self.config.)
 
     async def start(self) -> None:
         """
