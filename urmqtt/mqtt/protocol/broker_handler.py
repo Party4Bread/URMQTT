@@ -14,6 +14,7 @@ from urmqtt.mqtt.connack import (
 from urmqtt.mqtt.connect import ConnectPacket
 from urmqtt.mqtt.pingreq import PingReqPacket
 from urmqtt.mqtt.pingresp import PingRespPacket
+from urmqtt.mqtt.publish import PublishPacket
 from urmqtt.mqtt.subscribe import SubscribePacket
 from urmqtt.mqtt.suback import SubackPacket
 from urmqtt.mqtt.unsubscribe import UnsubscribePacket
@@ -25,12 +26,17 @@ from urmqtt.adapters import ReaderAdapter, WriterAdapter
 from urmqtt.errors import MQTTException
 from .handler import EVENT_MQTT_PACKET_RECEIVED, EVENT_MQTT_PACKET_SENT
 
+import lupa 
+from lupa import LuaRuntime
+
+lua=LuaRuntime()
 
 class BrokerProtocolHandler(ProtocolHandler):
     def __init__(
-        self, plugins_manager: PluginManager, session: Session = None, loop=None
+        self, plugins_manager: PluginManager, config:dict, session: Session = None, loop=None,
     ):
         super().__init__(plugins_manager, session, loop)
+        self.config=config
         self._disconnect_waiter = None
         self._pending_subscriptions = Queue()
         self._pending_unsubscriptions = Queue()
@@ -77,6 +83,38 @@ class BrokerProtocolHandler(ProtocolHandler):
     async def handle_pingreq(self, pingreq: PingReqPacket):
         await self._send_packet(PingRespPacket.build())
 
+    @staticmethod
+    def check_filter(filter:dict,packet:PublishPacket)->bool:
+        # TODO: Need to use pre-build lua
+        if packet.topic_name in filter.get("topic",[]):
+            # if filter.get("type","lua")=="lua":
+            return lua.eval(filter["src"])(packet.data.decode('u8'))
+            # else:
+        else:
+            return True
+
+    @staticmethod
+    def do_map(mapper:dict,packet:PublishPacket)->bool:
+        # TODO: Need to use pre-build lua
+        if packet.topic_name in filter.get("topic",[]):
+            # if filter.get("type","lua")=="lua":
+            packet.data = lua.eval(filter["src"])(packet.data.decode('u8')).encode('u8')
+            # else:
+
+    async def handle_publish(self, publish: PublishPacket):
+        # URMQTT: 
+
+        filters=self.config.get("data-filter",{}).get("filter",[])
+        for flt in filters:
+            if not BrokerProtocolHandler.check_filter(flt,publish):
+                return
+        
+        mappers=self.config.get("data-map",{}).get("mapper",[])
+        for mapper in mappers:
+            BrokerProtocolHandler.do_map(mapper,publish)
+
+        await self.handle_publish(self, publish)
+
     async def handle_subscribe(self, subscribe: SubscribePacket):
         subscription = {
             "packet_id": subscribe.variable_header.packet_id,
@@ -116,7 +154,7 @@ class BrokerProtocolHandler(ProtocolHandler):
 
     @classmethod
     async def init_from_connect(
-        cls, reader: ReaderAdapter, writer: WriterAdapter, plugins_manager, loop=None
+        cls, reader: ReaderAdapter, writer: WriterAdapter, plugins_manager, config, loop=None
     ):
         """
 
@@ -206,5 +244,5 @@ class BrokerProtocolHandler(ProtocolHandler):
         else:
             incoming_session.keep_alive = 0
 
-        handler = cls(plugins_manager, loop=loop)
+        handler = cls(plugins_manager, loop=loop, config=config)
         return handler, incoming_session

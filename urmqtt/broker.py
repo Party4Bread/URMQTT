@@ -233,7 +233,7 @@ class Broker:
     def rebuild_script(self):
         import lupa 
         # TODO : Reimplment to lupa from lua
-        #lupa.eval(self.config.)
+        # lupa.eval(self.config.)
 
     async def start(self) -> None:
         """
@@ -412,7 +412,7 @@ class Broker:
         # Wait for first packet and expect a CONNECT
         try:
             handler, client_session = await BrokerProtocolHandler.init_from_connect(
-                reader, writer, self.plugins_manager
+                reader, writer, self.plugins_manager, config=self.config
             )
         except urmqttException as exc:
             self.logger.warning(
@@ -672,14 +672,14 @@ class Broker:
         self.logger.debug("%s Client disconnected" % client_session.client_id)
         server.release_connection()
 
-    def _init_handler(self, session, reader, writer):
-        """
-        Create a BrokerProtocolHandler and attach to a session
-        :return:
-        """
-        handler = BrokerProtocolHandler(self.plugins_manager, self._loop)
-        handler.attach(session, reader, writer)
-        return handler
+    # def _init_handler(self, session, reader, writer):
+    #     """
+    #     Create a BrokerProtocolHandler and attach to a session
+    #     :return:
+    #     """
+    #     handler = BrokerProtocolHandler(self.plugins_manager, self._loop)
+    #     handler.attach(session, reader, writer)
+    #     return handler
 
     async def _stop_handler(self, handler):
         """

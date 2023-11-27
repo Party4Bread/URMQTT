@@ -2,7 +2,7 @@
     "data-filter":{
         "enabled": true,
         "plugins": ["lua_filter","py_filter"],
-        "mapper":[{
+        "filter":[{
             "topic":["temperature/get"],
             "type":"lua",
             "src":"(function(x) return tonumber(x)~=nil end)"
@@ -14,7 +14,11 @@
         "mapper":[{
             "topic":["temperature/get"],
             "type":"lua",
-            "src":"(function(x) return tostring((tonumber(x)*32)*5/9) end)"
+            "src":"(function(x) return tostring((tonumber(x)-32)*5/9) end)"
+        },{
+            "topic":["temperature/get"],
+            "type":"lua",
+            "src":"(function(x) return tostring(math.floor((tonumber(x)/4))*4) end)"
         }]
     }
 }

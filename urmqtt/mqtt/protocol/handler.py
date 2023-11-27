@@ -637,7 +637,6 @@ class ProtocolHandler:
     async def handle_publish(self, publish_packet: PublishPacket):
         packet_id = publish_packet.variable_header.packet_id
         qos = publish_packet.qos
-
         incoming_message = IncomingApplicationMessage(
             packet_id,
             publish_packet.topic_name,

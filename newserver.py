@@ -73,6 +73,7 @@ async def watch_update():
         parse_acl()
         parse_filtermap()
         broker.rebuild_script()
+        # Currently, hot reload not working with existing session. 
         print("ACL, SCRIPT RELOADED")
 
 if __name__ == "__main__":
